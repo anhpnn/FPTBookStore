@@ -1,0 +1,97 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.PagedList<FPTBookStore.Models.Customer>
+<link href="~/Content/TrangChuCss.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Customer Manage";
+    Layout = "~/Views/LayOut/AdminLayout.cshtml";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Account)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Fullname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Birthday)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Position)
+        </th>
+        <th>
+            Detail
+        </th>
+        <th>
+            Edit
+        </th>
+        <th>
+            Delete
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fullname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Birthday)
+        </td>
+        @if(item.Position==1)
+        {
+            <td>Admin</td>
+        }
+        else
+        {
+            <td>Customer</td>
+        }
+        <td>
+            @Html.ActionLink("Detail", "View", new { @_CusID = item.CustomerID })
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { @_CusID = item.CustomerID })
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "Delete", new { @_CusID = item.CustomerID })
+        </td>
+    </tr>
+}
+</table>
+<div id="divBody">
+    <br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+</div>
+<div id="divBody" class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("Index", "UserManage", new { _Page = page }))
+</div>

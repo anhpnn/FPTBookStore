@@ -1,0 +1,66 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.PagedList<FPTBookStore.Models.Publisher>
+<link href="~/Content/TrangChuCss.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Publisher Manage";
+    Layout = "~/Views/LayOut/AdminLayout.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Add new Publisher", "AddNew")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().PublisherName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Phone)
+        </th>
+        <th>
+            Detail
+        </th>
+        <th>
+            Edit
+        </th>
+        <th>
+            Delete
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PublisherName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.ActionLink("Detail", "View", new { @_PubID = item.PublisherID })
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { @_PubID = item.PublisherID })
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "Delete", new { @_PubID = item.PublisherID })
+        </td>
+    </tr>
+}
+
+</table>
+<div id="divBody">
+    <br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+</div>
+<div id="divBody" class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("Index", "PublisherManage", new { _Page = page }))
+</div>

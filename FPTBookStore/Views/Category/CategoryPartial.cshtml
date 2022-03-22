@@ -1,0 +1,8 @@
+﻿@using FPTBookStore.Models;
+@model List<Category>
+           @foreach (var item in Model)
+           {
+            <a href="@Url.Action("ThemedBook", "Category", new { @_CateID = item.CategoryID})" style="width :425px;text-align:center;" class="button button-submit">@item.CategoryName</a>
+           }
+<br/><br/><a href="@Url.Action("ListCategory", "Category")" style="width:100%;text-align:center;" class="button button-submit">Other Category ...</a>
+

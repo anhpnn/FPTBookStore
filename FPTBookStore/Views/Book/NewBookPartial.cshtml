@@ -1,0 +1,21 @@
+﻿@using FPTBookStore.Models;
+@model List<Book>
+<h1 class="item-header">New Book</h1>
+@{
+    foreach (var item in Model)
+    {
+        <div class="activity-list-update">
+            <img src="@Url.Content("~/ImageBook/"+item.CoverImage)" width="45" height="60" alt="Image">
+            @if (item.BookName.Length > 30)
+            {
+                <p><strong titile="@item.BookName">Title: </strong>@item.BookName.Substring(0, 30)...<br /><a href="@Url.Action("ViewDetail", "Book", new { @_BookID=item.BookID})">View Detail</a></p>
+            }
+            else
+            {
+                <p><strong titile="@item.BookName">Title: </strong>@item.BookName<br /><a href="@Url.Action("ViewDetail", "Book", new { @_BookID=item.BookID})">View Detail</a></p>
+                <div class="clear"></div>
+            }
+        </div>
+    }
+}
+<a href="#" class="item-footer green">Latest books</a>

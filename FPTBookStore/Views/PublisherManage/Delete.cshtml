@@ -1,0 +1,50 @@
+﻿@model FPTBookStore.Models.Publisher
+
+@{
+    ViewBag.Title = "Delete Publisher";
+    Layout = "~/Views/LayOut/AdminLayout.cshtml";
+}
+
+<h2>Confirm</h2>
+
+<h3>Are you sure to delete this Book</h3>
+
+<div style="font-size:16px;word-wrap: break-word;">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PublisherName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PublisherName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+    </dl>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" style="background-color:red;" value="Delete" class="btn btn-default" /> |
+        @Html.ActionLink("Back to Publisher Manage", "Index")
+    </div>
+}

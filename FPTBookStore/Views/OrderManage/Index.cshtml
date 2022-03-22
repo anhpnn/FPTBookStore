@@ -1,0 +1,68 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.PagedList<FPTBookStore.Models.Order>
+<link href="~/Content/TrangChuCss.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Order Manage";
+    Layout = "~/Views/LayOut/AdminLayout.cshtml";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().OrderID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Paid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().OrderStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().OrderDay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().DeliveryDay)
+        </th>
+        <th>
+            Edit
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Paid)
+        </td>
+        @if(item.OrderStatus == 0)
+        {
+            <td>Unfinished</td>
+        }
+        else
+        {
+            <td>Finished</td>
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderDay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeliveryDay)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { @_OrderID = item.OrderID })
+        </td>
+    </tr>
+}
+
+</table>
+<div id="divBody">
+    <br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+</div>
+<div id="divBody" class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("Index", "OrderManage", new { _Page = page }))
+</div>

@@ -1,0 +1,8 @@
+﻿@using FPTBookStore.Models;
+@model List<Publisher>
+<h1 style="color:red;font-weight:bold;">Publisher</h1>
+           @foreach (var item in Model)
+           {
+            <div><a href="@Url.Action("BookByPublisher", "Publisher", new { @_PubID = item.PublisherID})">@item.PublisherName</a></div>
+           }
+<div><a href="@Url.Action("ListPublisher", "Publisher")">Other Publisher..</a></div>

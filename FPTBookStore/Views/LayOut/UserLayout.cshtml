@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/NguoiDungCssLayout/fonts.css" rel="stylesheet" />
+    <link href="~/Content/NguoiDungCssLayout/screen.css" rel="stylesheet" />
+    <link href="~/Content/NguoiDungCssLayout/NguoiDungCssLayout.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/NivoSlider/jquery.nivo.slider.js"></script>
+    <script src="~/NivoSlider/jquery.nivo.slider.pack.js"></script>
+    <link href="~/NivoSlider/nivo-slider.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="ToanTrang">
+        <section class="blank">
+            <div class="flash">
+                <div class="icDienThoai">
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                    0911 878 047(Mr.Anh)
+                </div>
+                @if ((Session["Account"] == null) || (Session["Account"].ToString() == ""))
+                {
+                    <div class="DangKyDangNhap">
+                        @Html.Action("CartPartial", "Cart")
+                        <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                        <a href="@Url.Action("Register","User")">Register</a>
+                        <i class="fa fa-sign-in" aria-hidden="true"></i>
+                        <a href="@Url.Action("Login","User")">Login</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="DangKyDangNhap">
+                        @Html.Action("CartPartial", "Cart")
+                        @Html.Action("UserPartial", "User")
+                    </div>
+                }
+            </div>
+
+            <div class="flash success" id="divDanhMuc">
+                <div id="txtTimKiem">
+                    @using (Html.BeginForm("ResultSearch","Search",FormMethod.Post))
+                    {
+                        @Html.TextBox("txtTimKiem", "", htmlAttributes: new { @class="TextBoxTimKiem",@placeholder="Enter key word ..."})
+                        <div id="divHinhAnhTimKiem">
+                            <button type="submit"><img src="~/Image/Search2.png"></button>
+                        </div>
+                    }
+                </div>
+                <ul class="navMenu">
+                    <li>
+                        <i class="fa fa-home" aria-hidden="true"></i>
+                        <a href="@Url.Action("Index","Home")">Home</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                        <a href="@Url.Action("Contact","Home")">Contact</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        <a href="#">Tutorial</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-info" aria-hidden="true"></i>
+                        <a href="#">Introduction</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                        <a href="#">Recruit</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <div id="divMenuLeft">
+                <div class="activity">
+                    @Html.Action("NewBookPartial","Book")
+                </div>
+            </div>
+            <div id="slider" class="nivoSlider">
+                <img src="~/Image/1.jpg" />
+                <img src="~/Image/2.jpg" />
+                <img src="~/Image/3.jpg" />
+                <img src="~/Image/4.jpg" />
+            </div>
+            <div style="clear:both"></div>
+        </section>
+        
+            <div id="NoiDung">
+                @RenderBody()
+            </div>
+
+        <section>
+            <div>
+                @Html.Action("CategoryPartial", "Category")
+            </div>
+        </section>
+
+        <section class="blank items">
+            <div id="divLeft">
+                <div class="item">
+                    <div class="item-info">
+                        @Html.Action("PublisherPartial","Publisher")
+                    </div>   
+                </div>
+            </div>
+                <div id="divRight">
+                    @RenderSection("NoiDungBenPhai",false)
+                </div>
+                <div style="clear:both"></div>
+                <div>
+                    <a href="@Url.Action("Index","Home")" class="button button-buy">Welcome to FPT Bookstore</a>
+                </div>
+        </section>
+    </div>
+    <script type="text/javascript">
+    $(window).load(function () {
+        $('#slider').nivoSlider({ controlNav: false,nextText:'',prevText:''});
+    });
+    </script>
+</body>
+</html>

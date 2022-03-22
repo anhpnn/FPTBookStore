@@ -1,0 +1,59 @@
+﻿@model FPTBookStore.Models.Customer
+
+@{
+    ViewBag.Title = "Edit Customer";
+    Layout = "~/Views/LayOut/AdminLayout.cshtml";
+}
+
+<h2>New customer information</h2>
+
+@using (Html.BeginForm("Edit", "UserManage", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.CustomerID)
+        @Html.HiddenFor(model => model.Password)
+        @Html.HiddenFor(model => model.Account)
+        @Html.HiddenFor(model => model.Email)
+        @Html.HiddenFor(model => model.Address)
+        @Html.HiddenFor(model => model.Phone)
+        @Html.HiddenFor(model => model.Gender)
+        @Html.HiddenFor(model => model.Birthday)
+
+        @if (Model.CustomerID == 1)
+        {
+            @Html.HiddenFor(model => model.Position)
+            <div class="form-group">
+                @Html.LabelFor(model => model.Fullname, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Fullname, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Fullname, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.Fullname)
+            <div class="form-group">
+                @Html.LabelFor(model => model.Position, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Position, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" style="background-color:orange;" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to Customer Manage", "Index")
+</div>

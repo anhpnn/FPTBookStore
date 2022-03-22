@@ -1,0 +1,15 @@
+﻿<a href="@Url.Action("View", "User", new { @_CusID = @ViewBag.Customer.CustomerID })">
+    <i class="fa fa-user" aria-hidden="true"></i>
+    @ViewBag.Customer.Account
+</a>
+@if (ViewBag.Customer.Position == 1)
+{
+    <a href="@Url.Action("Index","BookManage")">
+        <i class="fa fa-user-secret" aria-hidden="true"></i>
+        Admin
+    </a>
+}
+<a href="@Url.Action("LogOut","User")">
+    <i class="fa fa-sign-out" aria-hidden="true"></i>
+    Log out
+</a>

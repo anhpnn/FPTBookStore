@@ -1,0 +1,7 @@
+﻿@if ((ViewBag.Customer.CustomerID == 1) && (ViewBag.Customer.Position == 1))
+{
+    <a href="@Url.Action("Index","UserManage")">
+        <i class="fa fa-male" aria-hidden="true"></i>
+        <span class="hidden-tablet">Customer Manage</span>
+    </a>
+}

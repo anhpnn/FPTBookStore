@@ -1,0 +1,48 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.PagedList<FPTBookStore.Models.Category>
+<link href="~/Content/TrangChuCss.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Category Manage";
+    Layout = "~/Views/LayOut/AdminLayout.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Add new Category", "AddNew")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model=>model.First().CategoryName)
+        </th>
+        <th>
+            Edit
+        </th>
+        <th>
+            Delete
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { @_CateID = item.CategoryID })
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "Delete", new { @_CateID = item.CategoryID })
+        </td>
+    </tr>
+}
+
+</table>
+<div id="divBody">
+    <br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+</div>
+<div id="divBody" class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("Index", "CategoryManage", new { _Page = page }))
+</div>

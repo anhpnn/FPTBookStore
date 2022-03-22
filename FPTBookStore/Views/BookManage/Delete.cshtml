@@ -1,0 +1,103 @@
+﻿@model FPTBookStore.Models.Book
+
+@{
+    ViewBag.Title = "Delete Book";
+    Layout = "~/Views/LayOut/AdminLayout.cshtml";
+}
+
+<h2>Confirm</h2>
+
+<h3>Are you sure to delete this Book</h3>
+
+<div style="font-size:16px;word-wrap: break-word;">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BookName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Details)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.Details)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoverImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoverImage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PublisherID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Publisher.PublisherName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoryID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.CategoryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookStatus)
+        </dt>
+            @if (Model.BookStatus == 1)
+            {
+                <dd>New</dd>
+            }
+            else
+            {
+                <dd>Old</dd>
+            }
+    </dl>
+</div>
+
+<img src="@Url.Content("~/ImageBook/"+Model.CoverImage)" width="500" height="750">
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" style="background-color:red;" value="Delete" class="btn btn-default" /> |
+        @Html.ActionLink("Back to Book Manage", "Index")
+    </div>
+}

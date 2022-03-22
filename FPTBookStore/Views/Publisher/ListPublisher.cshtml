@@ -1,0 +1,14 @@
+﻿@using FPTBookStore.Models;
+@model List<Publisher>
+<link href="~/Content/TrangChuCss.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "List Publisher";
+    Layout = "~/Views/LayOut/UserLayout.cshtml";
+}
+@foreach (var item in Model)
+{
+    <div id="divBody">
+        <a href="@Url.Action("BookByPublisher", "Publisher", new { @_PubID = item.PublisherID})" class="button button-submit">@item.PublisherName</a>
+    </div>
+    <br /><br />
+}
